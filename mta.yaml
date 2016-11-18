@@ -17,6 +17,11 @@ modules:
    - name: hdi-container
      properties:
         TARGET_CONTAINER: ~{hdi-container-name}
+   - name: CrossSchemaService
+     group: SERVICE_REPLACEMENTS
+     properties:
+       key: hdi-sflight-service
+       service: ~{sflight-service-name}
 
 resources:
   - name: openSAPHANA5_00-uaa
@@ -32,3 +37,9 @@ resources:
       config:
         schema: OPENSAP_HANA5_00
 
+  - name: CrossSchemaService
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SFLIGHT_00
+    properties:
+      sflight-service-name: ${service-name}
