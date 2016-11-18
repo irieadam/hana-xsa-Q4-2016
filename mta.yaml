@@ -25,7 +25,7 @@ modules:
    - name: user-container
      group: SERVICE_REPLACEMENTS
      properties:
-       key: hdi-user-services
+       key: hdi-user-service
        service: ~{user-container-name}
 
 - name: user-db

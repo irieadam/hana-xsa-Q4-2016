@@ -1,5 +1,5 @@
 context PurchaseOrder {
-	type BusinessKey : String(10);
+    type BusinessKey : String(10);
 	type SDate : LocalDate;
 	type CurrencyT : String(5);
 	type AmountT : Decimal(15,2);
@@ -7,12 +7,12 @@ context PurchaseOrder {
 	type UnitT: String(3);
 	type StatusT: String(1);
 	
-	Type HistoryT {
-	          CREATEDBY : BusinessKey;
-	          CREATEDAT : SDate;
-	          CHANGEDBY : BusinessKey;
-	          CHANGEDAT : SDate; 
-	        };
+ 	Type HistoryT {
+          CREATEDBY : BusinessKey;
+          CREATEDAT : SDate;
+          CHANGEDBY : BusinessKey;
+          CHANGEDAT : SDate; 
+        };
 
     Entity Header {
         key  PURCHASEORDERID: BusinessKey;
@@ -36,16 +36,16 @@ context PurchaseOrder {
     Entity Item {
         key  PURCHASEORDERID: BusinessKey;
         key  PURCHASEORDERITEM: BusinessKey;
-        HEADER: Association[1] to Header on HEADER.PURCHASEORDERID = PURCHASEORDERID; 
+      	HEADER: Association[1] to Header on HEADER.PURCHASEORDERID = PURCHASEORDERID; 
         PRODUCT:  BusinessKey;
         NOTEID: BusinessKey null;
         CURRENCY: CurrencyT;
         GROSSAMOUNT: AmountT;
         NETAMOUNT: AmountT;
         TAXAMOUNT: AmountT;
-        QUANTITY: QuantityT;
-        QUANTITYUNIT: UnitT;
-        DELIVERYDATE: SDate;
+	    QUANTITY: QuantityT;
+		QUANTITYUNIT: UnitT;
+		DELIVERYDATE: SDate;
       } technical configuration {
           column store;
       };
@@ -54,14 +54,14 @@ context PurchaseOrder {
       PURCHASEORDERID as "PurchaseOrderItemId", 
       PURCHASEORDERITEM as "ItemPos",
       HEADER.PARTNER as "PartnerId",
-      PRODUCT as "ProductID",
-      CURRENCY as "CurrencyCode",
+  	  PRODUCT as "ProductID",
+  	  CURRENCY as "CurrencyCode",
       GROSSAMOUNT as "Amount",
       NETAMOUNT as "NetAmount",
       TAXAMOUNT as "TaxAmount",
-      QUANTITY as "Quantity",
-      QUANTITYUNIT as "QuantityUnit",
-      DELIVERYDATE as "DeliveryDate1"
+  	  QUANTITY as "Quantity",
+  	  QUANTITYUNIT as "QuantityUnit",
+  	  DELIVERYDATE as "DeliveryDate1"
    } with structured privilege check;
    
 };
