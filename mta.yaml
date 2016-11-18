@@ -22,6 +22,19 @@ modules:
      properties:
        key: hdi-sflight-service
        service: ~{sflight-service-name}
+   - name: user-container
+     group: SERVICE_REPLACEMENTS
+     properties:
+       key: hdi-user-services
+       service: ~{user-container-name}
+
+- name: user-db
+  type: hdb
+  path: user-db
+  requires:
+   - name: user-container
+     properties:
+        TARGET_CONTAINER: ~{user-container-name}
 
 resources:
   - name: openSAPHANA5_00-uaa
@@ -43,3 +56,12 @@ resources:
       service-name: CROSS_SCHEMA_SFLIGHT_00
     properties:
       sflight-service-name: ${service-name}
+
+  - name: user-container
+    properties:
+       user-container-name: ${service-name}
+    type: com.sap.xs.hdi-container
+    parameters:
+      config:
+        schema: OPENSAP_HANA5_USER_00
+
